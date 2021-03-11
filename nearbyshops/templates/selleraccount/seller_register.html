@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<main>
+
+<div class="section" style ="margin-left: 20%;">
+
+        <div class="a-box seller_message_box"><div class="a-box-inner">
+            <h1 class="ng-binding" style="text-align: left;" >Register and Start Selling
+            </h1>
+            <p class="seller_message_p" style="text-align: left;">
+                </p><p class="ng-binding" style="text-align: left;">Please have the following ready before you begin:</p>
+                <ul>
+                    <li class="ng-binding" style="text-align: left;">Your bank account details for receiving payments from yoursbook</li>
+                    <li class="ng-binding" style="text-align: left;">Tax (GST/PAN) details of your business</li>
+                </ul>
+                <br>
+                <p class="ng-binding" style="text-align: left;">Please ensure that all the information you submit is accurate.</p>
+            <p></p>
+            <p class=" size-large text-bold h5 " style="text-align: left;">Enter details below to continue registration</p>
+        </div></div>
+
+
+
+        <form method="POST" class="card-body">
+            {% csrf_token %}
+                  <!--firstName-->
+                  <label for="companyName " class="" style="background-color: rgb(141, 236, 236) ;">companyName</label>
+                   
+                  <div class=" md-4 fixed" >
+                     <!-- <input type="text" id="name" class="form-control" placeholder="Name"> -->
+                    {{ form.companyName }}
+                     </div>
+  
+                  
+
+                  <p class="a-text-left a-size-mini a-color-secondary ng-binding" style="text-align: left;">
+                    Enter the company/business name as registered in GST/PAN
+                </p>
+                <div class="a-section a-spacing-micro">
+                    <span class="a-size-base a-text-bold ng-binding"> Seller Agreement </span>
+                    <!-- ngIf: fragmentData.showMandatory --></div>
+            
+                  <div data-ng-show="agreementSelected.errorIsNotSelected" style="text-align: left;" class="a-box a-alert-inline a-alert-inline-error ng-hide" aria-live="assertive" role="alert"><div class="a-box-inner a-alert-container"><i class="a-icon a-icon-alert"></i><div class="a-alert-content ng-binding">
+                      You must accept the agreement.
+                  </div></div></div>
+
+                  <div class="section spacing-top-micro " style="text-align: left;">
+                    <div class="checkbox checkbox-fancy agreementCheckbox ">
+                        {{ form.terms_condition }}
+                        <label>
+                        <span class="size-base ng-binding">
+                          I have read and agree to comply with and/or be bound by the terms and conditions of selling
+                        </span>
+                    </label></div>
+                  </div>
+
+
+
+
+                              
+              <hr class="mb-4">
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Submit and Continue</button>
+
+            </form>
+   
+   <div class="section a-spacing-medium a-spacing-top-large \ ng-binding" style="text-align: left;">
+       Like to create new account? 
+       <a class="a-size-base-plus a-link-normal link_color_legal ng-binding blue-text" target="_blank" title="Click here" href="{% url 'app:seller-register' %}"> 
+       Click here </a>
+   </div>
+                
+    <div class="a-section a-spacing-medium a-spacing-top-large text-left">
+        <a class="a-size-base-plus a-link-normal link_color_legal blue-text" target="_blank" title="Privacy Notice" href="#"> Privacy Notice </a>
+    </div>
+
+
+        
+</div>
+
+
+</main>
+
+
+{% endblock content %}
+
+{% block extra_scripts %}
+{% endblock extra_scripts %}

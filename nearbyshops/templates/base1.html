@@ -1,0 +1,610 @@
+{% load cart_template_tags %}
+
+
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Buy/Sell/Rent Old Books</title>
+  {% block extra_head %}
+  {% endblock %}
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/dropdown.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.res.css' %}">
+  <link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/owl.theme.default.min.css' %}" rel="stylesheet">
+  
+  <style type="text/css">
+    html,
+    body,
+    header,
+    .carousel {
+      height: 60vh;
+    }
+
+@media (max-width: 740px) {
+      html,
+      body,
+      header,
+      .carousel {
+        height: 40vh;
+      }
+      .menu {   
+          margin-top: 0px;
+        }
+      .menu a {
+          display: inline;
+        }
+      .menu li {
+          display: inline-block; 
+          text-align: right;
+        }
+      .item {
+          order: 1;
+          width: 100%;
+          text-align: center;
+          display: inline-block; 
+        }   
+        .submenu li {
+  list-style-type: none;
+  z-index: 9;}
+
+      .togglesearch{
+          background: #E8E8E4;
+          position: absolute;
+          top: 54px;
+          right: 28.7%;
+          width: 350px;
+          height: 60px;
+          line-height: 60px;
+          box-shadow: 0 0 10px rgba(0,0,0,0.5);
+          border-top:4px solid #D80B15;
+          display: none;
+        }
+    
+    .togglesearch:before{
+        content: "";
+        position: absolute;
+        top: -32px;
+        right: 13px;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-top: 14px solid transparent;
+        border-bottom: 14px solid #D80B15;
+      }
+    
+    .togglesearch input[type="text"]{
+        width: 200px;
+        padding: 5px 10px;
+        margin-left: 23px;
+        border: 1px solid #D80B15;
+        outline: none;
+      }
+    
+    .togglesearch input[type="button"]{
+        width: 80px;
+        padding: 5px 0;
+        background: #D80B15;
+        color: #fff;
+        margin-left: -6px;
+        border: 1px solid #D80B15;
+        outline: none;
+        cursor: pointer;
+      }       
+  ul.topnav li.center, 
+  ul.topnav li {float: left;} 
+  
+}
+
+  ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 5px 5px;
+  text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {background-color: #111;}
+
+ul.topnav li a.active {background-color: #4CAF50;}
+
+ul.topnav li.center {float: center;z-index: 9;}
+
+ul.topnav li li a {font-size:90%;} /* smaller font size for sub menu items */
+ul.topnav li:hover {background:#003f20;} /* highlights current hovered list item and the parent list items when hovering over sub menues */
+ul.topnav ul {
+position:absolute;
+padding:0;
+left:0;
+display:none; /* hides sublists */
+}
+ul.topnav li:hover ul ul {display:none;} /* hides sub-sublists */
+ul.topnav li:hover ul {display:block; z-index: 9;background-color: cadetblue;} /* shows sublist on hover */
+ul.topnav li li:hover ul {
+display:block; /* shows sub-sublist on hover */
+margin-left:10px; /* this should be the same width as the parent list item */
+margin-top:5px; /* aligns top of sub menu with top of list item */
+}
+
+.active {
+      display: block;
+}
+.boxed {
+  border: 1px solid green ;
+  width: 100%; 
+}
+.searchbox{
+  border: 1px solid green ;
+  width: 80%; 
+}
+.searchboxsnip{
+  border: 1px solid green ;
+  width: 19%; 
+
+}
+.textboxid
+{
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+    font-size:20px;
+}
+
+.locationbox
+{
+
+  margin-top: 2px;
+  width: 100%;
+  height: 40px;
+  overflow: hidden;
+    font-size:15px;   
+}
+
+  @media (min-width: 800px) and (max-width: 850px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 50vh;
+      }
+    }
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+}
+nav {
+  background: rgb(230, 149, 103);
+
+  border-bottom: 1px solid rgb(110, 92, 92);
+  padding-top: 5px;
+  padding-bottom: 0px;
+  line-height: 1.2;
+  font-family: 'Open Sans',sans-serif;
+  font-weight: 300;
+  z-index: 999;
+}
+a {
+  color: rgb(12, 12, 12);
+  text-decoration: none;
+}
+.img-container-block {
+  text-align: center;
+  left: 0;
+  top: 0;
+  max-width:100%;
+  max-height:100%;
+}
+.pull-right {
+    float: right!important;
+}
+.list-inline {
+    padding-left: 0;
+    margin-left: -5px;
+    list-style: none;
+}
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+.nopadding {
+    padding: 0!important;
+    margin: 0!important;
+}
+li{
+  margin: 1px 8px;
+}
+.wrapper{
+  width:100%; height: auto; overflow: hidden;
+}
+.menu,
+.submenu {
+  list-style-type: none;
+  z-index: 9;
+  
+}
+.logo {
+  font-size: 20px;
+  padding: 6px 8px 6px 0;
+}
+.item.button {
+  padding: 6px 4px;
+}
+.item:not(.button) a:hover,
+.item a:hover::after {
+  color: rgb(83, 182, 196);
+}
+/* Mobile menu */
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background: rgb(14, 211, 168);
+}
+.menu li a {
+  display: block;
+  padding: 5px 5px;
+}
+.menu li.subitem a {
+  padding: 5px 10px;
+  border:rgb(17, 15, 15);
+}
+.toggle {
+  order: 1;
+  font-size: 20px;
+  padding: none;
+}
+.item.button {
+  order: 2;
+}
+.item {
+  order: 3;
+  width: 100%;
+  text-align: center;
+  display: none;
+  white-space: nowrap;
+}
+.active .item {
+  display: block;
+}
+.button.secondary {
+  /* divider between buttons and menu links */
+  border-bottom: 1px #444 solid;
+}
+/* Submenu up from mobile screens */
+.submenu {
+  display: none;
+}
+
+.submenu-active .submenu {
+  display: block;
+}
+.has-submenu i {
+  font-size: 12px; 
+}
+.has-submenu > a::after {
+  font-family: "Font Awesome 5 Free";
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 900;
+  content: "\f078";
+  color: rgb(224, 43, 43);
+  padding-left: 5px;
+}
+.subitem a {
+  padding: 7.5px 10px;
+  border:rgb(20, 19, 19);
+}
+.submenu-active {
+  background-color: rgb(226, 89, 10);
+  border-radius: 3px;
+}
+
+/* Tablet menu */
+@media all and (min-width: 700px) {
+  .menu {
+    justify-content: center;
+  }
+  .logo {
+    flex: 1;
+  }
+  .item.button {
+    width: auto;
+    order: 1;
+    display: block;
+  }
+  .toggle {
+    flex: 1;
+    text-align: right;
+    order: 2;
+  }
+  /* Button up from tablet screen */
+  .menu li.button a {
+    padding: 7.5px 10px;
+    margin: 5px 0;
+  }
+  .button a {
+    background: #0080ff;
+    border: 1px royalblue solid;
+  }
+  .button.secondary {
+    border: 0;
+  }
+  .button.secondary a {
+    background: transparent;
+    border: 1px #0080ff solid;
+  }
+  .button a:hover {
+    text-decoration: none;
+  }
+  .button:not(.secondary) a:hover {
+    background: royalblue;
+    border-color: darkblue;
+  }
+}
+/* Desktop menu */
+@media all and (min-width: 960px) {
+  .menu {
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    background: none;
+  }
+  .logo {
+    order: 0;
+  }
+  .item {
+    order: 1;
+    position: relative;
+    display: block;
+    width: auto;
+  }
+  .button {
+    order: 2;
+  }
+  .submenu-active .submenu {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    background: rgb(10, 255, 255);
+    border: 2px solid #010101;
+  }
+  .toggle {
+    display: none;
+  }
+  .submenu-active {
+    border-radius: 0;
+  }
+}
+
+/*search field */
+* {
+  box-sizing: border-box;
+}
+
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+  </style>
+</head>
+
+
+<body>
+
+  <div class="mt-5 pt-4">
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+
+  
+<div class="pre-header fixed-top" style="background-color: cornflowerblue;">
+
+  <div class="container" style="width: 100%; height: 58px;">
+    <div class='row'>    
+      <li class="toggle" ><a href="#"><i class="fas fa-bars"></i></a></li>
+
+      <div class="col-md-2 col-sm-4 col-xs-1" style="margin-top:10px;">
+        <li style="margin-left: 2px;">
+          <a href = "{% url 'app:home' %}" class="nav-link waves-effect">YoursBook
+          </a>
+        </li>
+      </div>
+
+    
+      <div class="col-md-2 col-sm-2 col-xs-2" style="position: relative; margin-top:0px ;  display: inline-block;">
+        <div class="locationbox" >
+            <a href = "#"class="nav-link waves-effect"  style="display:inline-block;">
+              <span class="clearfix d-none d-sm-inline-block">
+              <i class="fas fa-home">{{destination}}</i></span>
+            </a>
+          </div>
+      </div>
+
+    <!-- <d0iv class="col-md-1 col-sm-2 col-xs-2" style="position: relative; margin-top:5px ;  display: inline-block;">
+      <div>
+          <a href = "tel:+91-7407993331"class="nav-link waves-effect"  style="display:inline-block;">
+            <i class="fas fa-phone">7407993331</i></a>
+        </div>
+    </div> -->
+
+    <div class="col-md-5 col-sm-5 col-xs-2" style="position: relative; margin-top:5px ;margin-left:25px ;  display: inline-block;">
+        <span class="clearfix d-none d-sm-inline-block">
+        <form class="example" action="{% url 'app:search_result' %}">
+          <input type="text" name="query" placeholder="Books / Author" aria-label="Search" style=" height:35px; margin-top: 5px;">
+          <button type="submit" style="height:35px; margin-top: 5px; background-color: brown;"><i class="fa fa-search"></i></button>
+        </form>
+        </span>
+    </div>
+
+    {% if request.user.is_authenticated %}
+
+    <div cl ass="col-md-3 col-sm-3 col-xs-5" style="position: relative; margin-top:5px ;  display: inline-block;">
+      <ul class=" menu list-unstyled list-inline" style="margin-top: 5px;">
+
+        <li class="searchbar" >
+          <span class="clearfix d-block d-sm-none">
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <div class="togglesearch">
+              <input type="text" name="query" placeholder="Books / Author" aria-label="Search"/>
+              <input type="button" value="Search"/>
+          </div>
+          </span>
+        </li>
+
+        <li class="item">
+          <a href = "{% url 'app:order-summary' %}" class="nav-link waves-effect"  style="display:inline-block;">
+            <span class="badge red z-depth-1 mr-1"> {{request.user|cart_item_count}} </span>
+            <i class="fas fa-shopping-cart"><span class="clearfix d-none d-sm-inline-block">Cart</span></i>
+          </a>
+        </li>
+
+        <li class="item has-submenu" style="margin-left: 5px;" >
+            <a tabindex="0"> <i class="fas fa-user"><span class="clearfix d-none d-sm-inline-block">My account
+            </span></i>
+            </a>
+            <ul class="submenu">
+              <li class="subitem"><a href="{% url 'app:view_profile' %}">
+                <span class="clearfix"><div class="img-container-block">
+                  <img src="{{ user.userprofile.get_photo_url }}" class="circular--square" width="30" height="30" alt="img">
+                  Profile</div>
+                </span></a>
+              </li>
+              <li class="subitem"><a href="{% url 'app:ordered-summary' %}">Orders</a></li>
+              <li class="subitem"><a href="/sharing/">Seller account</a></li>
+              <li class="subitem"><a href="{% url 'account_logout' %}">Logout</a></li>
+            </ul>
+        </li>
+      </ul>
+    </div>
+
+    {% else %}
+    <div class="col-md-2 col-sm-3 col-xs-3" style="position: relative; margin-top:5px ;  display: inline-block;">
+      <ul class="menu list-unstyled list-inline pull-right" style="margin-top: 5px;">
+        <li>
+          <a class="nav-link waves-effect" href="{% url 'account_login' %}">Login
+          </a>
+        </li>
+        <li >
+          <a class="nav-link waves-effect" href="{% url 'account_signup' %}">Signup
+          </a>
+        </li>
+        </ul>
+    </div>
+
+    {% endif %}
+    </div>
+    </div>
+</div>
+
+    <ul class="topnav" >
+      <li ><a href="{% url 'app:home' %}">Home</a></li>
+      <li ><a href="#">About</a></li>
+      <li >
+        <a tabindex="0">Categories</a>
+        <ul >
+          <li  ><a href="#">Science Fiction</a></li>
+          <li ><a href="#">Romance</a></li>
+          <li ><a href="#">Kids</a></li>
+          <li ><a href="#">Old age</a></li>
+          <li ><a href="#">Youngster</a></li>
+          <li ><a href="#">Motivation</a></li>
+          <li ><a href="#">School</a></li>
+          <li ><a href="#">College(12+)</a></li>
+          
+        </ul>
+      </li>
+      <li><a href="#">Contact</a>
+      </li>
+    </ul>
+
+<!-- 
+<ul class="topnav">
+  <li><a class="active" href="#home">Home</a></li>
+  <li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li class="right"><a href="#about">About</a></li>
+</ul> -->
+
+
+    {% block body %}
+    {% endblock %}
+    </body>
+
+    {% block content %}
+    {% endblock content %}
+
+    {% block extra_body %}
+    {% endblock %}
+
+    {% include "footer.html" %}
+    {% include "scripts.html" %}
+
+    {% block extra_scripts %}
+    {% endblock extra_scripts %}
+
+</html>

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<main>
+  <div class="container">
+    <h2 class="my-5 h2 text-center">Share Your Books</h2>
+
+            <!--Navbar-->
+            <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-5 mb-8">
+
+              <!-- Navbar brand -->
+              <span class="navbar-brand">Sell / Rent FORMS:</span>
+        
+              <!-- Collapse button -->
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+        
+              <!-- Collapsible content -->
+              <div class="collapse navbar-collapse" id="basicExampleNav">
+        
+                <!-- Links -->
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'app:sharing' %}">Sell form
+                      <span class="sr-only">(current)</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'app:renting' %}">Rent form</a>
+                  </li>
+        
+                </ul>
+              
+              </div>
+              <!-- Collapsible content -->
+        
+            </nav>
+            <!--/.Navbar-->
+
+
+    <div class="row">
+      <div class="col-md-8 mb-4">
+        <div class="card">
+
+          <form method="POST" class="card-body" enctype="multipart/form-data" >
+            {% csrf_token %}
+
+
+            <div class='hideable_title_form'>
+              <span class="badge badge-primary">{{ formtype }}</span>
+
+              <div class="md-form mb-5"></div>
+
+                {{ form|crispy }}
+                <!--<button type="submit">Upload</button> -->
+              </div>
+
+
+            <hr class="col-md-4 mb-4">
+
+            <a href="{% url 'app:share-summary' %}">
+              <button class="btn btn-warning btn-lg btn-block" type="submit">Submit</button>
+            </a>
+            
+
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<!-- This product includes GeoLite2 data created by MaxMind, available from
+<a href="https://www.maxmind.com">https://www.maxmind.com</a>. -->
+
+{% endblock content %}
+
+{% block extra_scripts %}
+
+{% endblock extra_scripts %}

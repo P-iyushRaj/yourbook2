@@ -1,0 +1,174 @@
+{% load cart_template_tags %}
+{% load static %}
+
+
+<main>
+  <div class="container">
+
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-5 mb-8">
+
+          <!-- Navbar brand -->
+          <span class="navbar-brand">Categories:</span>
+    
+          <!-- Collapse button -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <!-- Collapsible content -->
+          <div class="collapse navbar-collapse" id="basicExampleNav">
+    
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">All
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Sell</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">RentS</a>
+              </li>
+
+    
+            </ul>
+            <!-- Links -->
+    
+            <form class="form-inline">
+              <div class="md-form my-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search Books" aria-label="Search">
+              </div>
+            </form>
+          </div>
+          <!-- Collapsible content -->
+    
+        </nav>
+        <!--/.Navbar-->
+
+      </div>
+
+
+
+
+
+
+
+  <!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand waves-effect" href="" target="_blank">
+        <strong class="blue-text">YoursBook</strong>
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link waves-effect" href="">Home
+              <span class="sr-only"></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="/sharing/" target="_blank">Share Books</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="/products/"
+              target="_blank">Discover Books</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="" target="_blank">About us</a>
+          </li>
+        </ul>
+
+
+        <ul class="navbar-nav nav-flex-icons">
+
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a href = "{% url 'app:order-summary' %}" class="nav-link waves-effect">
+            <span class="badge red z-depth-1 mr-1"> {{request.user|cart_item_count}} </span>
+            <i class="fas fa-shopping-cart"></i>
+            <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
+          <span class="clearfix d-none d-sm-inline-block"> Logout </span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'app:view_profile' %}">
+          <span class="clearfix d-none d-sm-inline-block">     <div class="view overlay">
+            <img src="{{ user.userprofile.get_photo_url }}" class="circular--square" width="30" height="30" alt="img">
+              <div class="mask rgba-white-slight"></div>
+            
+        </div> </span>
+          </a>
+        </li>
+
+        
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'account_login' %}">
+          <span class="clearfix d-none d-sm-inline-block"> Login </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
+
+          <span class="clearfix d-none d-sm-inline-block"> Signup </span>
+          </a>
+        </li>
+        
+
+        {% endif %}
+
+
+        <!-- Right -->
+        
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+
+
+    <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/dropdown.js' %}"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+
+  </script>
+
+
+
+
+</main>
+<!-- Navbar -->
+

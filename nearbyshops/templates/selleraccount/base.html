@@ -1,0 +1,526 @@
+{% load cart_template_tags %}
+
+
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Buy/Sell/Rent Old Books</title>
+  {% block extra_head %}
+  {% endblock %}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.res.css' %}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/dropdown.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.res.css' %}">
+  <link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/owl.theme.default.min.css' %}" rel="stylesheet">
+  <style type="text/css">
+    html,
+    body,
+    header,
+
+
+@media (max-width: 740px) {
+      html,
+      body,
+      header,
+      .carousel {
+        height: 30vh;
+      }
+ 
+      .togglesearch{
+          position: fixed;
+          z-index: 99;
+          top: 5px;
+          left: 10px;
+          width: 200px;
+          height: 20px;
+          display: none;
+        }   
+             
+    
+  ul.pre-topnav li.center, 
+  ul.pre-topnav li {float: left;} 
+
+}
+ul.pre-topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+ul.pre-topnav li {float: left;}
+
+ul.pre-topnav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 5px 5px;
+  text-decoration: none;
+}
+
+ul.pre-topnav li a:hover:not(.active) {background-color: #111;}
+
+ul.pre-topnav li a.active {background-color: #4CAF50;}
+
+ul.pre-topnav li.center {float: center;}
+
+ul.pre-topnav li li a {font-size:90%;} /* smaller font size for sub menu items */
+ul.pre-topnav li:hover {background:#003f20;} /* highlights current hovered list item and the parent list items when hovering over sub menues */
+ul.pre-topnav ul {
+position: fixed;
+padding:10px 10px;
+left:88%;
+display:none; /* hides sublists */
+/*margin-left: 450px;*/
+height: 200px;
+width: 80px;
+z-index: 10;
+}
+
+ul.pre-topnav li:hover ul ul {display:none;} /* hides sub-sublists */
+ul.pre-topnav li:hover ul {display:block;background-color: rgb(99, 121, 121);} /* shows sublist on hover */
+ul.pre-topnav li li:hover ul {
+display:block; /* shows sub-sublist on hover */
+margin-left:10px; /* this should be the same width as the parent list item */
+margin-top:2px; /* aligns top of sub menu with top of list item */
+}
+
+/* phone verify */
+
+.navbar-menu {
+  border: 0;
+  border-radius: 0;
+}
+.navbar-menu .navbar-collapse {
+  padding: 0;
+  border-top: 0;
+}
+.navbar-main {
+  margin: 0;
+}
+.navbar-menu {
+  background-color: #7352a4;
+}
+.navbar-menu .navbar-header {
+  padding: 7px;
+}
+.navbar-main > li > a {
+  font-size: 20px;
+  font-weight: 400;
+  color: #ffffff;
+  text-transform: uppercase;
+  -webkit-transition: 0.2s color ease-in-out;
+  transition: 0.2s color ease-in-out;
+  -webkit-transition: 0.2s background ease-in-out;
+  transition: 0.2s background ease-in-out;
+}
+.navbar-main > li > a small {
+  color: #fff;
+  font-size: 10px;
+  font-weight: 300;
+  text-transform: none;
+}
+.navbar-main > li > a:hover,
+.navbar-main > li > a:focus,
+.navbar-main > li > a.active {
+  background-color: #ffffff;
+  color: #583e7e;
+}
+.navbar-main > li > a:hover small,
+.navbar-main > li > a:focus small,
+.navbar-main > li > a.active small {
+  color: #000;
+}
+@media (min-width: 768px) {
+  .navbar-main-container {
+    background-color: #7352a4;
+    background-repeat: repeat-x;
+    background-image: -webkit-gradient(linear, 50% top, 50% top, from(#7352a4), to(#583e7e));
+    background-image: -webkit-linear-gradient(left, color-stop(#7352a4 50%), color-stop(#583e7e 50%));
+    background-image: -moz-linear-gradient(left, #7352a4 50%, #583e7e 50%);
+    background-image: linear-gradient(to right, #7352a4 50%, #583e7e 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7352a4', endColorstr='#583e7e', GradientType=1);
+    /* IE6-9 */
+  }
+  .navbar-main-container .navbar-nav {
+    float: none;
+  }
+  .navbar-main {
+    margin: 0 auto;
+    padding-right: 10px;
+    max-width: 100%;
+  }
+  .navbar-main li {
+    display: inline-block;
+    height: 40px;
+    position: relative;
+    width: 22%;
+    background-color: #190c2c;
+    background-repeat: repeat-x;
+    background-image: -webkit-gradient(linear, 0% top, 100% top, from(#583e7e), to(#7352a4));
+    background-image: -webkit-linear-gradient(left, color-stop(#583e7e 0%), color-stop(#7352a4 100%));
+    background-image: -moz-linear-gradient(left, #583e7e 0%, #7352a4 100%);
+    background-image: linear-gradient(to right, #583e7e 0%, #7352a4 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#583e7e', endColorstr='#7352a4', GradientType=1);
+    /* IE6-9 */
+  }
+  .navbar-main li:first-child:before {
+    border: 23px solid transparent;
+    border-left-color: #7352a4;
+    border-right: 0;
+    content: " ";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    width: 0px;
+    z-index: 5;
+  }
+  .navbar-main li a {
+    display: table;
+    height: 100%;
+    padding: 0 0 0 0px;
+    position: relative;
+    width: 100%;
+  }
+  .navbar-main li a:after {
+    border: 20px  transparent;
+    border-left-color: #7352a4;
+    border-right: 0;
+    content: " ";
+    display: block;
+    position: absolute;
+    right: 40px;
+    top: 0px;
+    width: 0px;
+
+    -webkit-transition: 0.2s border-color ease-in-out;
+    transition: 0.2s border-color ease-in-out;
+  }
+  .navbar-main li a:hover:after,
+  .navbar-main li a.active:after {
+    border-left-color: #ffffff;
+  }
+  /* .navbar-main li a.active {background-color: #4CAF50;} */
+  .navbar-main li a span {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+@media (min-width: 992px) {
+  .navbar-main {
+    max-width: 980px;
+  }
+  .navbar-main li a {
+    padding: 0 0 0 10px;
+  }
+}
+
+.active {
+      display: block;
+      background-color: chocolate;
+}
+.boxed {
+  border: 1px solid green ;
+  width: 100%; 
+}
+.searchbox{
+  border: 1px solid green ;
+  width: 80%; 
+}
+.searchboxsnip{
+  border: 1px solid green ;
+  width: 19%; 
+
+}
+.textboxid
+{
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  font-size:20px;
+}
+
+.locationbox
+{
+
+  margin-top: 0px;
+  width: 200px;
+  height: 40px;
+  overflow: hidden;
+  font-size:13px;  
+  /*background-color: #003f20; */
+}
+
+  @media (min-width: 800px) and (max-width: 850px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 50vh;
+      }
+    }
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+.img-container-block {
+  text-align: center;
+  left: 0;
+  top: 0;
+  max-width:100%;
+  max-height:100%;
+}
+.pull-right {
+    float: right!important;
+}
+.list-inline {
+    padding-left: 0;
+    margin-left: -5px;
+    list-style: none;
+}
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+.nopadding {
+    padding: 0!important;
+    margin: 0!important;
+}
+li{
+  margin: 1px 8px;
+}
+.wrapper{
+  width:100%; height: auto; overflow: hidden;
+}
+
+.logo {
+  font-size: 20px;
+  padding: 6px 8px 6px 0;
+}
+.toggle {
+  order: 1;
+  font-size: 20px;
+  padding: none;
+}
+.button.secondary {
+  /* divider between buttons and menu links */
+  border-bottom: 1px #444 solid;
+}
+
+
+/* Tablet menu */
+@media all and (min-width: 700px) {
+  .logo {
+    flex: 1;
+  }
+  .toggle {
+    flex: 1;
+    text-align: right;
+    order: 2;
+  }
+  /* Button up from tablet screen */
+  .button a {
+    background: #0080ff;
+    border: 1px royalblue solid;
+  }
+  .button.secondary {
+    border: 0;
+  }
+  .button.secondary a {
+    background: transparent;
+    border: 1px #0080ff solid;
+  }
+  .button a:hover {
+    text-decoration: none;
+  }
+  .button:not(.secondary) a:hover {
+    background: royalblue;
+    border-color: darkblue;
+  }
+
+  ul.pre-topnav li.center, 
+  ul.pre-topnav li {float: left;} 
+}
+/* Desktop menu */
+@media all and (min-width: 960px) {
+  .logo {
+    order: 0;
+  }
+  .button {
+    order: 2;
+  }
+  .toggle {
+    display: none;
+  }
+  ul.pre-topnav li.center, 
+  ul.pre-topnav li {float: left;} 
+
+}
+
+/*search field */
+* {
+  box-sizing: border-box;
+}
+
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+  </style>
+</head>
+
+
+<body>
+
+
+
+<ul class="pre-topnav topnav fixed-top " style="background-color: rgb(86, 82, 87); " >
+  <div class="col-md-2 col-sm-2 col-1 pull-left" style="margin-top:10px;  display: inline-block;">
+      
+        <li style="margin-left: 2px;">
+          <a href = "{% url 'app:home' %}" class="nav-link waves-effect">YoursBook
+          </a>
+        </li>
+  </div>
+  
+
+  <div class="col-md-3 col-sm-3 col-6 pull-right" style="margin-top:10px;  display: inline-block;">
+    {% if request.user.is_authenticated %}
+
+        <li style="position:relative;">
+            <a  tabindex="0"> <i class="fas fa-user"><span class="clearfix d-none d-xl-inline-block">My account
+            </span></i>
+            </a>
+            <ul >
+              <li><a href="{% url 'app:view_profile' %}">
+                <span class="clearfix"><div class="img-container-block">
+                  <img src="{{ user.userprofile.get_photo_url }}" class="circular--square" width="30" height="30" alt="img">
+                  Profile</div>
+                </span></a>
+              </li>
+              <li ><a href="{% url 'app:ordered-summary' %}">Orders</a></li>
+              <li ><a target="_blank" href="/you-seller/">Seller account</a></li>
+              <li ><a href="{% url 'account_logout' %}">Logout</a></li>
+            </ul>
+        </li>
+
+    {% else %}
+        <li>
+          <a class="nav-link waves-effect" href="{% url 'account_login' %}">Login
+          </a>
+        </li>
+        
+
+    {% endif %}
+  </div>
+
+</ul>
+
+<div class='container' style="margin-top: 5px;">
+<nav class="navbar navbar-menu " role="navigation">
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="navbar-main-container">
+      <ul class="nav navbar-nav navbar-main" id="main-nav">
+          <li class="navbar-item">
+              <a  class="nav-link" href="{% url 'app:phone-verification' %}"><span class="icon-arrow-right">Step1<br/>
+              <small>Phone verify</small></span></a>
+          </li>
+          <li class="navbar-item"><a href="{% url 'app:seller-details' %}"><span class="icon-arrow-right">Step2<br/>
+              <small>Seller details</small></span></a>
+          </li>
+          <li class="navbar-item"><a href="#"><span class="icon-arrow-right">Step3<br/>
+              <small>TAX details</small></span></a>
+          </li>
+          <li class="navbar-item"><a href="#"><span class="icon-arrow-right">Step4<br/>
+              <small>Dashboard</small></span></a>
+          </li>
+      </ul>
+  </div>
+</nav>
+</div>
+
+
+<div class="mt-5 pt-4" style="margin-top: 20px; margin-left: 5%; background-color: #f1a145;">
+  {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+  {% endif %}
+  </div>
+
+
+    {% block body %}
+    {% endblock %}
+    </body>
+
+    {% block content %}
+    {% endblock content %}
+
+    {% block extra_body %}
+    {% endblock %}
+
+    {% include "footer.html" %}
+    {% include "scripts.html" %}
+
+    {% block extra_scripts %}
+    {% endblock extra_scripts %}
+
+</html>
+

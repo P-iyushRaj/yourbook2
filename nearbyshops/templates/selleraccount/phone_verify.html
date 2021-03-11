@@ -1,0 +1,38 @@
+{% extends "selleraccount/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<main>
+    
+    <div class="container">
+      <h1 class="page-header">
+        Progress steps navbar in Bootstrap
+      </h1>
+
+      <form method="POST" class="card-body">
+        {% csrf_token %}
+              <!--firstName-->
+              <label for="phone" class="" style="background-color: rgb(141, 236, 236) ;">verify your phone number {{phone_number}}</label>
+               
+              <div class=" md-4 fixed "  style="margin-bottom:10px ; margin-top: 10px;" >
+                 <!-- <input type="text" id="name" class="form-control" placeholder="Name"> -->
+                {{ form }}
+                 </div>
+        
+  
+          <hr class="mb-4">
+          <button class="btn btn-primary btn-lg btn-block" type="submit">{{button}}</button>
+
+        </form>
+
+    </div>
+
+</main>
+
+{% endblock content %}
+
+{% block extra_scripts %}
+
+{% endblock extra_scripts %}
+

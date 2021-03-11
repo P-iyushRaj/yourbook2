@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block head %}
+<title>Profile</title>
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    <h1>Account details</h1>
+<!--
+    {% if user.userprofile.image %}
+    <img class="circular--square" src="{{ user.userprofile.Profile_image.url }}" width="200" height="200">
+    {% else %}
+    <img class="circular--square" src="{% static 'img/sample.jpg' %}" width="200" height="200">
+    {% endif %}
+
+    <img class="circular--square" src="{{ user.userprofile.image }}" width="200" height="200">
+-->
+    <div class="view overlay">
+        <img src="{{ user.userprofile.get_photo_url }}" class="circular--square" width="200" height="200" alt="img">
+          <div class="mask rgba-white-slight"></div>
+        
+    </div>
+
+    <p>Username: {{ user }}</p>
+    <p>Name: {{ user.userprofile.name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Phone: {{ user.userprofile.phone }}</p>
+    <p>Address: {{ user.userprofile.address }}</p>
+
+    <hr class="col-md-4 mb-4">
+    <a href="{% url 'app:edit_profile' %}">
+      <button class="btn btn-primary btn-md my-0 p" type="submit">Edit Profile</button>
+    </a>
+
+</div>
+
+{% endblock %}

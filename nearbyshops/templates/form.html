@@ -1,0 +1,22 @@
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<main>
+  <div class="container wow fadeIn">
+    <h2 class="my-5 h2 text-center">Share Your Books</h2>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit">
+    </form>
+
+  </div>
+</main>
+
+{% endblock content %}
+
+{% block extra_scripts %}
+
+{% endblock extra_scripts %}
